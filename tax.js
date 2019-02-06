@@ -25,29 +25,29 @@ var companySalesData = [{
 
 function calculateSalesTax(salesData, taxRates) {
   // Implement your code here
-  var out = "{\n";
+  var out = {};
 
   for (const elem in salesData) {
-    var company = salesData[elem];
     var sales = 0;
-    var taxes = 0;
-
-    out += "  " + company.name + ": {\n";
-    for (const elem in company.sales) {
-      sales += company.sales[elem];
-      taxes += company.sales[elem] * salesTaxRates[company.province];
+    comp = salesData[elem];
+    if (!out[comp.name]) {
+      out[comp.name] = {
+        sales: 0,
+        taxes: 0
+      };
     }
-    out += "    totalSales: " + sales + "\n" +
-      "    totalTaxes: " + taxes + "\n" +
-      "  }\n";
+
+    for (const elem in comp.sales) {
+      sales += comp.sales[elem];
+    }
+
+    out[comp.name].sales += sales;
+    out[comp.name].taxes += sales * salesTaxRates[comp.province];
   }
-  out += "}";
 
   console.log(out);
 }
-
 var results = calculateSalesTax(companySalesData, salesTaxRates);
-
 /* Expected Results:
 {
   Telus: {
