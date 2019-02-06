@@ -1,9 +1,11 @@
+// object with info stored as properties
 var salesTaxRates = {
   AB: 0.05,
   BC: 0.12,
   SK: 0.10
 };
 
+// array of objects
 var companySalesData = [{
     name: "Telus",
     province: "BC",
@@ -23,6 +25,11 @@ var companySalesData = [{
 
 function calculateSalesTax(salesData, taxRates) {
   // Implement your code here
+  for (const elem in salesData) {
+    var company = salesData[elem];
+
+    console.log(company);
+  }
 }
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
