@@ -25,11 +25,25 @@ var companySalesData = [{
 
 function calculateSalesTax(salesData, taxRates) {
   // Implement your code here
+  var out = "{\n";
+
   for (const elem in salesData) {
     var company = salesData[elem];
+    var sales = 0;
+    var taxes = 0;
 
-    console.log(company);
+    out += "  " + company.name + ": {\n";
+    for (const elem in company.sales) {
+      sales += company.sales[elem];
+      taxes += company.sales[elem] * salesTaxRates[company.province];
+    }
+    out += "    totalSales: " + sales + "\n" +
+      "    totalTaxes: " + taxes + "\n" +
+      "  }\n";
   }
+  out += "}";
+
+  console.log(out);
 }
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
